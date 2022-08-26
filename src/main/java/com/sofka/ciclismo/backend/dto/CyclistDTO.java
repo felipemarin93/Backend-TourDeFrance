@@ -10,7 +10,6 @@ import javax.validation.constraints.Size;
 
 @NoArgsConstructor
 @Data
-@AllArgsConstructor
 public class CyclistDTO {
 
     private String idCyclist;
@@ -27,4 +26,12 @@ public class CyclistDTO {
     private String teamName;
     @NotBlank
     private String nationality;
+
+    public CyclistDTO(String idCyclist, String fullName, String cyclistNumber, String teamName, String nationality){
+        this.idCyclist = idCyclist;
+        this.fullName = fullName;
+        this.cyclistNumber = cyclistNumber;
+        this.teamName = teamName;
+        this.nationality = nationality;
+    }
 }
