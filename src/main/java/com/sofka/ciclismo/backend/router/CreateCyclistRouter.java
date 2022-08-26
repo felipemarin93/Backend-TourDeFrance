@@ -8,8 +8,8 @@ import org.springdoc.core.annotations.RouterOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
-import org.springframework.web.servlet.function.RouterFunction;
-import org.springframework.web.servlet.function.ServerResponse;
+import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 import java.util.function.Function;
@@ -36,7 +36,7 @@ public class CreateCyclistRouter {
                                 .bodyValue(result));
         return route(
                 POST("/cyclist/create").and(accept(MediaType.APPLICATION_JSON)),
-                request -> request.bodyToMono(CyclistDTO.class).flatmap(createCyclist)
+                request -> request.bodyToMono(CyclistDTO.class).flatMap(createCyclist)
         );
     }
 

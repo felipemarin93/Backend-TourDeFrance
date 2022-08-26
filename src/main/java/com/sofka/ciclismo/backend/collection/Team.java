@@ -25,6 +25,5 @@ public class Team {
     private String teamCode;
     @NotBlank
     private String country;
-    @NotBlank
-    private List<Cyclist> squadron;
+
 }

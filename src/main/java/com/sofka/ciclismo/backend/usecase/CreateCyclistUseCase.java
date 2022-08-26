@@ -1,9 +1,9 @@
 package com.sofka.ciclismo.backend.usecase;
 
+
 import com.sofka.ciclismo.backend.dto.CyclistDTO;
 import com.sofka.ciclismo.backend.mapper.CyclistMapper;
 import com.sofka.ciclismo.backend.repository.CyclistRepository;
-import com.sofka.ciclismo.backend.usecase.SaveCyclist;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
@@ -15,7 +15,7 @@ public class CreateCyclistUseCase implements SaveCyclist {
     private final CyclistRepository cyclistRepository;
     private final CyclistMapper cyclistMapper;
 
-    public createCyclistUseCase(CyclistRepository cyclistRepository, CyclistMapper cyclistMapper){
+    public CreateCyclistUseCase(CyclistRepository cyclistRepository, CyclistMapper cyclistMapper){
         this.cyclistRepository = cyclistRepository;
         this.cyclistMapper = cyclistMapper;
     }

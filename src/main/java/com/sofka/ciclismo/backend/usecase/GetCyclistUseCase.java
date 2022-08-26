@@ -12,7 +12,7 @@ import java.util.function.Function;
 
 @Service
 @Validated
-public class GetCyclistUseCase implements Function<String, Mono<CyclistDTO> {
+public class GetCyclistUseCase implements Function<String, Mono<CyclistDTO>> {
     private final CyclistRepository cyclistRepository;
     private final CyclistMapper cyclistmapper;
 
