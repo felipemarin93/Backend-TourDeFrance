@@ -21,7 +21,7 @@ public class Cyclist {
     private String fullName;
     @NotBlank
     @Indexed(unique = true)
-    private Integer cyclistNumber;
+    private String cyclistNumber;
     @NotBlank
     private String teamName;
     @NotBlank
