@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Data
@@ -16,10 +17,13 @@ import java.util.List;
 public class Team {
     @Id
     private String teamId;
-    private String nameTeam;
-
+    @NotBlank
+    private String teamName;
+    @NotBlank
     @Indexed(unique = true)
     private String teamCode;
+    @NotBlank
     private String country;
+    @NotBlank
     private List<Cyclist> squadron;
 }
