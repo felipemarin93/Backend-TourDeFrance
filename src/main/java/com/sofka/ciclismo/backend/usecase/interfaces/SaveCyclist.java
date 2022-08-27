@@ -1,4 +1,4 @@
-package com.sofka.ciclismo.backend.usecase;
+package com.sofka.ciclismo.backend.usecase.interfaces;
 
 import com.sofka.ciclismo.backend.dto.CyclistDTO;
 import reactor.core.publisher.Mono;

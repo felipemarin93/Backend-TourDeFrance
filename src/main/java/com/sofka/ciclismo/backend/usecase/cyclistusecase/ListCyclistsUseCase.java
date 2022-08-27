@@ -1,28 +1,28 @@
-package com.sofka.ciclismo.backend.usecase;
-
+package com.sofka.ciclismo.backend.usecase.cyclistusecase;
 
 import com.sofka.ciclismo.backend.dto.CyclistDTO;
 import com.sofka.ciclismo.backend.mapper.CyclistMapper;
 import com.sofka.ciclismo.backend.repository.CyclistRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
+
+import java.util.function.Supplier;
 
 @Service
 @Validated
-public class CreateCyclistUseCase implements SaveCyclist {
-
+public class ListCyclistsUseCase implements Supplier<Flux<CyclistDTO>> {
     private final CyclistRepository cyclistRepository;
     private final CyclistMapper cyclistMapper;
 
-    public CreateCyclistUseCase(CyclistRepository cyclistRepository, CyclistMapper cyclistMapper){
+
+    public ListCyclistsUseCase(CyclistRepository cyclistRepository, CyclistMapper cyclistMapper){
         this.cyclistRepository = cyclistRepository;
         this.cyclistMapper = cyclistMapper;
     }
-    @Override
-    public Mono<CyclistDTO> apply(CyclistDTO cyclistDTO){
-        return cyclistRepository
-                .save(cyclistMapper.mapCyclistDTOToCyclist(null).apply(cyclistDTO))
+
+    public Flux<CyclistDTO> get(){
+        return cyclistRepository.findAll()
                 .map(cyclistMapper.mapCyclistToCyclistDTO());
     }
 }
