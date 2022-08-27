@@ -1,7 +1,7 @@
-package com.sofka.ciclismo.backend.router;
+package com.sofka.ciclismo.backend.router.cyclist;
 
 import com.sofka.ciclismo.backend.dto.CyclistDTO;
-import com.sofka.ciclismo.backend.usecase.cyclistusecase.CreateCyclistUseCase;
+import com.sofka.ciclismo.backend.usecase.cyclist.CreateCyclistUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;

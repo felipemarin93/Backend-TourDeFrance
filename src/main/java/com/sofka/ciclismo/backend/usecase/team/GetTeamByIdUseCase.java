@@ -1,31 +1,30 @@
-package com.sofka.ciclismo.backend.usecase.teamusecase;
+package com.sofka.ciclismo.backend.usecase.team;
 
 import com.sofka.ciclismo.backend.dto.TeamDTO;
 import com.sofka.ciclismo.backend.mapper.TeamMapper;
 import com.sofka.ciclismo.backend.repository.TeamRepository;
-
-import com.sofka.ciclismo.backend.usecase.interfaces.SaveTeam;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
+import java.util.function.Function;
+
 @Service
 @Validated
-public class CreateTeamUseCase implements SaveTeam {
+public class GetTeamByIdUseCase implements Function<String, Mono<TeamDTO>>{
     private final TeamRepository teamRepository;
-    private final TeamMapper teamMapper;
+    private final  TeamMapper teamMapper;
 
-    public CreateTeamUseCase(TeamRepository teamRepository, TeamMapper teamMapper){
+    private GetTeamByIdUseCase(TeamRepository teamRepository, TeamMapper teamMapper){
         this.teamRepository = teamRepository;
         this.teamMapper = teamMapper;
     }
 
     @Override
-    public Mono<TeamDTO> apply(TeamDTO teamDTO) {
-        return teamRepository
-                .save(teamMapper.mapTeamDTOToTeam(null).apply(teamDTO))
+    public Mono<TeamDTO> apply (String id){
+        Objects.requireNonNull(id, "Team ID is required");
+        return teamRepository.findById(id)
                 .map(teamMapper.mapTeamToTeamDTO());
     }
-
-
 }

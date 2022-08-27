@@ -1,8 +1,7 @@
-package com.sofka.ciclismo.backend.router;
+package com.sofka.ciclismo.backend.router.cyclist;
 
 import com.sofka.ciclismo.backend.dto.CyclistDTO;
-
-import com.sofka.ciclismo.backend.usecase.cyclistusecase.ListCyclistsByNationalityUseCase;
+import com.sofka.ciclismo.backend.usecase.cyclist.ListCyclistsByTeamNameUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -15,18 +14,17 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
-public class ListCyclistsByNationalityRouter {
+public class ListCyclistsByTeamNameRouter {
+
     @Bean
-    public RouterFunction<ServerResponse> listCyclistsByNationality(ListCyclistsByNationalityUseCase listCyclistsByNationalityUseCase){
+    public RouterFunction<ServerResponse> listCyclistsByTeamName(ListCyclistsByTeamNameUseCase listCyclistsByTeamNameUseCase){
         return route(
-                GET("/cyclistlist/{nationality}").and(accept(MediaType.APPLICATION_JSON)),
+                GET("/cyclist/list/{nameTeam}").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(listCyclistsByNationalityUseCase
-                                        .apply(request.pathVariable("nationality")),
+                        .body(BodyInserters.fromPublisher(listCyclistsByTeamNameUseCase
+                                        .apply(request.pathVariable("nameTeam")),
                                 CyclistDTO.class))
         );
     }
-
-
 }

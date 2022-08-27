@@ -1,4 +1,4 @@
-package com.sofka.ciclismo.backend.usecase.cyclistusecase;
+package com.sofka.ciclismo.backend.usecase.cyclist;
 
 
 import com.sofka.ciclismo.backend.repository.CyclistRepository;

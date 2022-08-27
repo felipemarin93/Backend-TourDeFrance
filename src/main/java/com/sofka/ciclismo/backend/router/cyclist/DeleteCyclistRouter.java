@@ -1,6 +1,6 @@
-package com.sofka.ciclismo.backend.router;
+package com.sofka.ciclismo.backend.router.cyclist;
 
-import com.sofka.ciclismo.backend.usecase.cyclistusecase.DeleteCyclistUseCase;
+import com.sofka.ciclismo.backend.usecase.cyclist.DeleteCyclistUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;

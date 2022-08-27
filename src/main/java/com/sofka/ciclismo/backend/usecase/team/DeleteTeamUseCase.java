@@ -1,4 +1,4 @@
-package com.sofka.ciclismo.backend.usecase.teamusecase;
+package com.sofka.ciclismo.backend.usecase.team;
 
 import com.sofka.ciclismo.backend.repository.TeamRepository;
 import org.springframework.stereotype.Service;

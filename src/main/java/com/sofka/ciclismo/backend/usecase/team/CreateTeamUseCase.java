@@ -1,4 +1,4 @@
-package com.sofka.ciclismo.backend.usecase.teamusecase;
+package com.sofka.ciclismo.backend.usecase.team;
 
 import com.sofka.ciclismo.backend.dto.TeamDTO;
 import com.sofka.ciclismo.backend.mapper.TeamMapper;
@@ -11,20 +11,21 @@ import reactor.core.publisher.Mono;
 
 @Service
 @Validated
-public class UpdateTeamUseCase implements SaveTeam {
+public class CreateTeamUseCase implements SaveTeam {
     private final TeamRepository teamRepository;
     private final TeamMapper teamMapper;
 
-    public UpdateTeamUseCase(TeamRepository teamRepository, TeamMapper teamMapper){
+    public CreateTeamUseCase(TeamRepository teamRepository, TeamMapper teamMapper){
         this.teamRepository = teamRepository;
         this.teamMapper = teamMapper;
     }
 
     @Override
-    public Mono<TeamDTO> apply(TeamDTO teamDTO){
+    public Mono<TeamDTO> apply(TeamDTO teamDTO) {
         return teamRepository
-                .save(teamMapper.mapTeamDTOToTeam(teamDTO.getTeamId())
-                        .apply(teamDTO))
-                            .map(teamMapper.mapTeamToTeamDTO());
+                .save(teamMapper.mapTeamDTOToTeam(null).apply(teamDTO))
+                .map(teamMapper.mapTeamToTeamDTO());
     }
+
+
 }

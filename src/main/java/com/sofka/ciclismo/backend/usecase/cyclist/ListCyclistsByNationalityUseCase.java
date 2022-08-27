@@ -1,4 +1,4 @@
-package com.sofka.ciclismo.backend.usecase.cyclistusecase;
+package com.sofka.ciclismo.backend.usecase.cyclist;
 
 import com.sofka.ciclismo.backend.dto.CyclistDTO;
 import com.sofka.ciclismo.backend.mapper.CyclistMapper;
@@ -7,22 +7,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;
 
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 @Service
 @Validated
-public class ListCyclistsUseCase implements Supplier<Flux<CyclistDTO>> {
+public class ListCyclistsByNationalityUseCase implements Function<String, Flux<CyclistDTO>> {
     private final CyclistRepository cyclistRepository;
     private final CyclistMapper cyclistMapper;
 
-
-    public ListCyclistsUseCase(CyclistRepository cyclistRepository, CyclistMapper cyclistMapper){
+    public ListCyclistsByNationalityUseCase(CyclistRepository cyclistRepository, CyclistMapper cyclistMapper){
         this.cyclistRepository = cyclistRepository;
         this.cyclistMapper = cyclistMapper;
     }
 
-    public Flux<CyclistDTO> get(){
-        return cyclistRepository.findAll()
+    @Override
+    public Flux<CyclistDTO> apply(String nationality){
+        return cyclistRepository.findCyclistsByNationality(nationality)
                 .map(cyclistMapper.mapCyclistToCyclistDTO());
     }
 }
