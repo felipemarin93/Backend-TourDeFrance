@@ -7,22 +7,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
 import java.util.function.Function;
 
 @Service
 @Validated
-public class GetTeamByCodeUseCase implements Function<String, Mono<TeamDTO>> {
+public class GetTeamByIdUseCase implements Function<String, Mono<TeamDTO>>{
     private final TeamRepository teamRepository;
-    private final TeamMapper teamMapper;
+    private final  TeamMapper teamMapper;
 
-    public GetTeamByCodeUseCase(TeamRepository teamRepository, TeamMapper teamMapper){
-        this.teamMapper = teamMapper;
+    private GetTeamByIdUseCase(TeamRepository teamRepository, TeamMapper teamMapper){
         this.teamRepository = teamRepository;
+        this.teamMapper = teamMapper;
     }
 
     @Override
-    public Mono<TeamDTO> apply (String code){
-        return teamRepository.findTeamByTeamCode(code)
+    public Mono<TeamDTO> apply (String id){
+        Objects.requireNonNull(id, "Team ID is required");
+        return teamRepository.findById(id)
                 .map(teamMapper.mapTeamToTeamDTO());
     }
 }

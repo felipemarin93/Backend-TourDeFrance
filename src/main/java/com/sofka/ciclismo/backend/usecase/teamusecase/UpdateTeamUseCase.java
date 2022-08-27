@@ -3,26 +3,28 @@ package com.sofka.ciclismo.backend.usecase.teamusecase;
 import com.sofka.ciclismo.backend.dto.TeamDTO;
 import com.sofka.ciclismo.backend.mapper.TeamMapper;
 import com.sofka.ciclismo.backend.repository.TeamRepository;
+
+import com.sofka.ciclismo.backend.usecase.interfaces.SaveTeam;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
 
-import java.util.function.Function;
-
 @Service
 @Validated
-public class GetTeamByCodeUseCase implements Function<String, Mono<TeamDTO>> {
+public class UpdateTeamUseCase implements SaveTeam {
     private final TeamRepository teamRepository;
     private final TeamMapper teamMapper;
 
-    public GetTeamByCodeUseCase(TeamRepository teamRepository, TeamMapper teamMapper){
-        this.teamMapper = teamMapper;
+    public UpdateTeamUseCase(TeamRepository teamRepository, TeamMapper teamMapper){
         this.teamRepository = teamRepository;
+        this.teamMapper = teamMapper;
     }
 
     @Override
-    public Mono<TeamDTO> apply (String code){
-        return teamRepository.findTeamByTeamCode(code)
-                .map(teamMapper.mapTeamToTeamDTO());
+    public Mono<TeamDTO> apply(TeamDTO teamDTO){
+        return teamRepository
+                .save(teamMapper.mapTeamDTOToTeam(teamDTO.getTeamId())
+                        .apply(teamDTO))
+                            .map(teamMapper.mapTeamToTeamDTO());
     }
 }

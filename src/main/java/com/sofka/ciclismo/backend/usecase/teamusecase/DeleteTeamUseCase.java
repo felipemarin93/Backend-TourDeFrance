@@ -1,11 +1,15 @@
 package com.sofka.ciclismo.backend.usecase.teamusecase;
 
 import com.sofka.ciclismo.backend.repository.TeamRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 import java.util.function.Function;
 
+@Service
+@Validated
 public class DeleteTeamUseCase implements Function<String, Mono<Void>> {
     private final TeamRepository teamRepository;
 

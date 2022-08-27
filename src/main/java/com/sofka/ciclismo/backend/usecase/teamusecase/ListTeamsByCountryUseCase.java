@@ -5,24 +5,25 @@ import com.sofka.ciclismo.backend.mapper.TeamMapper;
 import com.sofka.ciclismo.backend.repository.TeamRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 
 import java.util.function.Function;
 
 @Service
 @Validated
-public class GetTeamByCodeUseCase implements Function<String, Mono<TeamDTO>> {
+public class ListTeamsByCountryUseCase implements Function<String, Flux<TeamDTO>> {
     private final TeamRepository teamRepository;
     private final TeamMapper teamMapper;
 
-    public GetTeamByCodeUseCase(TeamRepository teamRepository, TeamMapper teamMapper){
-        this.teamMapper = teamMapper;
+    public ListTeamsByCountryUseCase(TeamRepository teamRepository, TeamMapper teamMapper){
         this.teamRepository = teamRepository;
+        this.teamMapper = teamMapper;
     }
 
     @Override
-    public Mono<TeamDTO> apply (String code){
-        return teamRepository.findTeamByTeamCode(code)
+    public Flux<TeamDTO> apply (String country){
+        return teamRepository.findTeamsByCountry(country)
                 .map(teamMapper.mapTeamToTeamDTO());
     }
+
 }
