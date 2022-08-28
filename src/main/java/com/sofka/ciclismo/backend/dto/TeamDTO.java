@@ -1,6 +1,7 @@
 package com.sofka.ciclismo.backend.dto;
 
 import com.sofka.ciclismo.backend.collection.Cyclist;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+@Data
 @Getter
 @Setter
 @NoArgsConstructor

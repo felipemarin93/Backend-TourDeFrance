@@ -12,19 +12,19 @@ import java.util.function.Function;
 
 @Service
 @Validated
-public class GetTeamByIdUseCase implements Function<String, Mono<TeamDTO>>{
+public class GetTeamUseCase implements Function<String, Mono<TeamDTO>> {
     private final TeamRepository teamRepository;
-    private final  TeamMapper teamMapper;
+    private final TeamMapper teamMapper;
 
-    private GetTeamByIdUseCase(TeamRepository teamRepository, TeamMapper teamMapper){
+    public GetTeamUseCase(TeamRepository teamRepository, TeamMapper teamMapper){
         this.teamRepository = teamRepository;
         this.teamMapper = teamMapper;
     }
-
     @Override
-    public Mono<TeamDTO> apply (String id){
+    public Mono<TeamDTO> apply(String id){
         Objects.requireNonNull(id, "Team ID is required");
         return teamRepository.findById(id)
                 .map(teamMapper.mapTeamToTeamDTO());
     }
+
 }
